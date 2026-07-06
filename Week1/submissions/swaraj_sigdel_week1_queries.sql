@@ -1,13 +1,15 @@
 
--- Week 1 Assignment
+-- Week 1 Assignment — Swaraj Sigdel
 
 -- ── Query 1 ───────────────────────────────────────────────────────
 -- Question: How many total rides are in the dataset?
 
 SELECT
+
     count(*)
 FROM
-    rides;   -- Output: 5000
+    rides;
+-- Output: 5000
 
 
 -- ── Query 2 ───────────────────────────────────────────────────────
@@ -43,7 +45,8 @@ SELECT
 FROM
     rides
 WHERE
-    rating IS NULL;   -- Output: 2379 rides
+    rating IS NULL;
+-- Output: 2379 rides
 
 -- Interpretation:
 -- A NULL rating may indicate:
@@ -70,8 +73,10 @@ LIMIT 10;
 -- Question: Count how many rides exist for each ride_status.
 
 SELECT
-    ride_status,
-    count(*) AS count_ride_status
+    ride_status
+,
+    count
+(*) AS count_ride_status
 FROM
     rides
 GROUP BY
@@ -86,7 +91,8 @@ SELECT
 FROM
     rides
 WHERE
-    ride_status = 'completed';   -- Output: 1,430,112.40
+    ride_status = 'completed';
+-- Output: 1,430,112.40
 
 
 -- ── Query 8 ───────────────────────────────────────────────────────
