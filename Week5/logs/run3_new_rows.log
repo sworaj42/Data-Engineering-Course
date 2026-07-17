@@ -1,0 +1,25 @@
+2026-07-17 21:28:18,622  INFO [pipeline.py:76] Pipeline starting — mode: INCREMENTAL
+2026-07-17 21:28:18,714  INFO [extract.py:13] Extracted 25 from the table
+2026-07-17 21:28:18,722  INFO [load.py:21] 25 inserted to dim_driver
+2026-07-17 21:28:18,725  INFO [extract.py:13] Extracted 45 from the table
+2026-07-17 21:28:18,737  INFO [load.py:44] 45 inserted to dim_passenger
+2026-07-17 21:28:18,739  INFO [extract.py:13] Extracted 25 from the table
+2026-07-17 21:28:18,745  INFO [load.py:69] 0 inserted to dim_location
+2026-07-17 21:28:18,746  INFO [extract.py:13] Extracted 7 from the table
+2026-07-17 21:28:18,747  INFO [load.py:91] 0 inserted to dim_payment_method
+2026-07-17 21:28:18,748  INFO [extract.py:13] Extracted 10 from the table
+2026-07-17 21:28:18,751  INFO [load.py:114] 0 inserted to dim_promo_code
+2026-07-17 21:28:18,751  INFO [extract.py:13] Extracted 30 from the table
+2026-07-17 21:28:18,758  INFO [load.py:139] 0 inserted to dim_vehicle
+2026-07-17 21:28:18,759  INFO [pipeline.py:101] Dimension table load completed in 0.05s
+2026-07-17 21:28:18,759  INFO [extract.py:190] Loading lookup table into memmory
+2026-07-17 21:28:18,763  INFO [pipeline.py:106] Lookup extraction completed in 0.00s
+2026-07-17 21:28:18,768  INFO [extract.py:234] Watermark: 2026-06-29 21:53:01
+2026-07-17 21:28:18,770  INFO [extract.py:13] Extracted 10 from the table
+2026-07-17 21:28:18,771  INFO [pipeline.py:115] Trip extraction completed in 0.01s
+2026-07-17 21:28:18,771  INFO [transform.py:111] Transformed 10 rows, skipped 0
+2026-07-17 21:28:18,771  INFO [pipeline.py:120] Transformation completed in 0.00s
+2026-07-17 21:28:18,771  INFO [quality.py:124] Quality gate passed: 10 rows, 5 checks
+2026-07-17 21:28:18,771  INFO [pipeline.py:130] Quality gate passed in 0.00s
+2026-07-17 21:28:18,776  INFO [load.py:185] 10 inserted to fact_trips
+2026-07-17 21:28:18,777  INFO [pipeline.py:135] Trip load completed in 0.01s

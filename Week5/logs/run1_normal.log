@@ -1,0 +1,46 @@
+2026-07-17 21:24:15,793  INFO [pipeline.py:76] Pipeline starting — mode: INCREMENTAL
+2026-07-17 21:24:15,890  INFO [extract.py:13] Extracted 25 from the table
+2026-07-17 21:24:15,908  INFO [load.py:21] 25 inserted to dim_driver
+2026-07-17 21:24:15,913  INFO [extract.py:13] Extracted 45 from the table
+2026-07-17 21:24:15,928  INFO [load.py:44] 45 inserted to dim_passenger
+2026-07-17 21:24:15,930  INFO [extract.py:13] Extracted 25 from the table
+2026-07-17 21:24:15,941  INFO [load.py:69] 0 inserted to dim_location
+2026-07-17 21:24:15,942  INFO [extract.py:13] Extracted 7 from the table
+2026-07-17 21:24:15,946  INFO [load.py:91] 0 inserted to dim_payment_method
+2026-07-17 21:24:15,947  INFO [extract.py:13] Extracted 10 from the table
+2026-07-17 21:24:15,951  INFO [load.py:114] 0 inserted to dim_promo_code
+2026-07-17 21:24:15,952  INFO [extract.py:13] Extracted 30 from the table
+2026-07-17 21:24:15,965  INFO [load.py:139] 0 inserted to dim_vehicle
+2026-07-17 21:24:15,966  INFO [pipeline.py:101] Dimension table load completed in 0.09s
+2026-07-17 21:24:15,966  INFO [extract.py:190] Loading lookup table into memmory
+2026-07-17 21:24:15,972  INFO [pipeline.py:106] Lookup extraction completed in 0.01s
+2026-07-17 21:24:15,977  INFO [extract.py:234] Watermark: 2026-06-29 21:53:01
+2026-07-17 21:24:15,980  INFO [extract.py:13] Extracted 0 from the table
+2026-07-17 21:24:15,980  INFO [pipeline.py:115] Trip extraction completed in 0.01s
+2026-07-17 21:24:15,980  INFO [transform.py:111] Transformed 0 rows, skipped 0
+2026-07-17 21:24:15,980  INFO [pipeline.py:120] Transformation completed in 0.00s
+2026-07-17 21:24:15,980  INFO [pipeline.py:124] No new trips to load — watermark is current, pipeline complete
+2026-07-17 21:29:08,649  INFO [pipeline.py:76] Pipeline starting — mode: FULL
+2026-07-17 21:29:08,746  INFO [extract.py:13] Extracted 25 from the table
+2026-07-17 21:29:08,754  INFO [load.py:21] 25 inserted to dim_driver
+2026-07-17 21:29:08,757  INFO [extract.py:13] Extracted 45 from the table
+2026-07-17 21:29:08,769  INFO [load.py:44] 45 inserted to dim_passenger
+2026-07-17 21:29:08,771  INFO [extract.py:13] Extracted 25 from the table
+2026-07-17 21:29:08,777  INFO [load.py:69] 0 inserted to dim_location
+2026-07-17 21:29:08,778  INFO [extract.py:13] Extracted 7 from the table
+2026-07-17 21:29:08,780  INFO [load.py:91] 0 inserted to dim_payment_method
+2026-07-17 21:29:08,781  INFO [extract.py:13] Extracted 10 from the table
+2026-07-17 21:29:08,783  INFO [load.py:114] 0 inserted to dim_promo_code
+2026-07-17 21:29:08,784  INFO [extract.py:13] Extracted 30 from the table
+2026-07-17 21:29:08,791  INFO [load.py:139] 0 inserted to dim_vehicle
+2026-07-17 21:29:08,791  INFO [pipeline.py:101] Dimension table load completed in 0.05s
+2026-07-17 21:29:08,791  INFO [extract.py:190] Loading lookup table into memmory
+2026-07-17 21:29:08,795  INFO [pipeline.py:106] Lookup extraction completed in 0.00s
+2026-07-17 21:29:08,899  INFO [extract.py:13] Extracted 10010 from the table
+2026-07-17 21:29:08,900  INFO [pipeline.py:115] Trip extraction completed in 0.10s
+2026-07-17 21:29:08,942  INFO [transform.py:111] Transformed 10010 rows, skipped 0
+2026-07-17 21:29:08,942  INFO [pipeline.py:120] Transformation completed in 0.04s
+2026-07-17 21:29:08,945  INFO [quality.py:124] Quality gate passed: 10,010 rows, 5 checks
+2026-07-17 21:29:08,945  INFO [pipeline.py:130] Quality gate passed in 0.00s
+2026-07-17 21:29:12,330  INFO [load.py:185] 0 inserted to fact_trips
+2026-07-17 21:29:12,331  INFO [pipeline.py:135] Trip load completed in 3.39s
