@@ -118,11 +118,35 @@ def load_dim_promo_code(conn, promo_code_data):
         logger.error(str(e))
         raise
 
+def load_dim_vehicle(conn, vehicle_data):
+    insert_dim_vehicle_sql = """
+ INSERT INTO dim_vehicle
+    (vehicle_id, plate_number, make, model, year, color, category, is_active)
+    VALUES ( %(vehicle_id)s,
+             %(plate_number)s,
+             %(make)s,
+             %(model)s,
+             %(year)s,
+             %(color)s,
+             %(category)s,
+             %(is_active)s
+            )
+    ON CONFLICT (vehicle_id) DO NOTHING
+"""
+    try:
+        with conn.cursor() as curr:
+            curr.executemany(insert_dim_vehicle_sql, vehicle_data)
+            logger.info(f"{curr.rowcount} inserted to dim_vehicle")
+        conn.commit()
+    except Exception as e:
+        conn.rollback()
+        logger.error(str(e))
+        raise
 
 def load_fact_trips(conn, fact_data):
     insert_fact_trips_sql = """
  INSERT INTO fact_trips
-    (source_trip_id, date_key, driver_key, passenger_key,
+    (source_trip_id, date_key, time_key, driver_key, passenger_key,vehicle_key,
      pickup_location_key, dropoff_location_key,
      payment_method_key, promo_code_key,
      base_fare, tip_amount, discount_amount, fare_amount,
@@ -131,8 +155,10 @@ def load_fact_trips(conn, fact_data):
      surge_multiplier, requested_at)
     VALUES ( %(source_trip_id)s,
              %(date_key)s,
+             %(time_key)s,
              %(driver_key)s,
              %(passenger_key)s,
+             %(vehicle_key)s,
              %(pickup_location_key)s,
              %(dropoff_location_key)s,
              %(payment_method_key)s,

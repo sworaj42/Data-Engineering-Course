@@ -112,6 +112,22 @@ def extract_promo_code(conn):
     """
     return extract(conn, extract_promo_code_sql)
 
+def extract_vehicle(conn):
+    extract_vehicle_sql = """
+    SELECT
+        vehicle_id,
+        plate_number,
+        make,
+        model,
+        year,
+        color,
+        category,
+        is_active
+    FROM
+        vehicles v;
+    """
+    return extract(conn, extract_vehicle_sql)
+
 
 def extract_trips_incremental(conn,watermark):
     extract_trip_sql = """
@@ -119,6 +135,7 @@ def extract_trips_incremental(conn,watermark):
         t.trip_id,
         t.driver_id,
         t.passenger_id,
+        t.vehicle_id,
         t.pickup_location_id,
         t.dropoff_location_id,
         t.payment_method_id,
@@ -136,7 +153,7 @@ def extract_trips_incremental(conn,watermark):
         tc.cancelled_by          -- from trip_cancellations (NULL for non-cancelled)
     FROM  trips t
     LEFT JOIN trip_cancellations tc ON t.trip_id = tc.trip_id
-     WHERE t.requested_at > %(watermark)s
+    WHERE t.requested_at > %(watermark)s
     ORDER BY t.requested_at
         """
     return extract(conn, extract_trip_sql,watermark)
@@ -147,6 +164,7 @@ def extract_trips_full(conn):
         t.trip_id,
         t.driver_id,
         t.passenger_id,
+        t.vehicle_id,
         t.pickup_location_id,
         t.dropoff_location_id,
         t.payment_method_id,
@@ -186,9 +204,15 @@ def extract_lookup_dim(conn):
 
         curr.execute("SELECT promo_code_id, promo_code_key FROM dim_promo_code")
         lookup["promo_code"] = {r[0]: r[1] for r in curr.fetchall()}
+       
+        curr.execute("SELECT vehicle_id, vehicle_key FROM dim_vehicle")
+        lookup["vehicle"] = {r[0]:r[1] for r in curr.fetchall()}
 
         curr.execute("SELECT date_key FROM dim_date")
         lookup["date"] = {r[0]: True for r in curr.fetchall()}
+        
+        curr.execute("SELECT time_key FROM dim_time")
+        lookup["time"] = {r[0]: True for r in curr.fetchall()}
     return lookup
 
 

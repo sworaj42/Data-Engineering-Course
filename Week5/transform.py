@@ -14,6 +14,14 @@ def transform(oltp_row, lookups):
             logger.warning(f"trip {trip_id}: date_key {date_key} outside of dim_date range — skipped")
             skipped += 1
             continue
+        
+        requested_at = row["requested_at"]
+        rounded_minute = (requested_at.minute // 15) * 15
+        time_key = requested_at.hour * 100 + rounded_minute
+        if time_key not in lookups["time"]:
+            logger.warning(f"trip {trip_id}: time_key {time_key} not in dim_time — skipped")
+            skipped += 1
+            continue
 
         driver_key = lookups["driver"].get(row["driver_id"])
         if driver_key is None:
@@ -24,6 +32,12 @@ def transform(oltp_row, lookups):
         passenger_key = lookups["passenger"].get(row["passenger_id"])
         if passenger_key is None:
             logger.warning(f"trip {trip_id}: passenger_id {row['passenger_id']} not in dim_passenger — skipped")
+            skipped += 1
+            continue
+        
+        vehicle_key = lookups["vehicle"].get(row["vehicle_id"])
+        if vehicle_key is None:
+            logger.warning(f"trip {trip_id}: vehicle_id {row['vehicle_id']} not in dim_vehicle — skipped")
             skipped += 1
             continue
 
@@ -74,7 +88,9 @@ def transform(oltp_row, lookups):
             "source_trip_id":       trip_id,
             "date_key":             date_key,
             "driver_key":           driver_key,
+            "time_key":             time_key,
             "passenger_key":        passenger_key,
+            "vehicle_key":          vehicle_key,
             "pickup_location_key":  pickup_location_key,
             "dropoff_location_key": dropoff_location_key,
             "payment_method_key":   payment_method_key,
@@ -93,4 +109,7 @@ def transform(oltp_row, lookups):
         })
 
     logger.info(f"Transformed {len(fact_rows)} rows, skipped {skipped}")
+    # TEMPORARY: Inject bad data for testing the quality gate
+    # if fact_rows:
+    #     fact_rows[0]["fare_amount"] = -1
     return fact_rows
